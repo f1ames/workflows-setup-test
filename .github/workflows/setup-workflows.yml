@@ -2,7 +2,7 @@ name: Setup and update common workflows
 
 on:
   schedule:
-  - cron: "*/10 * * * *"
+  - cron: "*/10 0 * * *"
 
 jobs:
   update:
@@ -17,9 +17,9 @@ jobs:
         # https://github.com/marketplace/actions/checkout
         uses: actions/checkout@v2
         with:
-          path: _workflows
+          path: ckeditor4-workflows-common
           repository: ckeditor/ckeditor4-workflows-common
-          ref: t/setup-workflows
+          ref: master
 
       - name: Setup workflows directory
         run: |
@@ -27,7 +27,7 @@ jobs:
 
       - name: Copy workflow files
         run: |
-          for file in ./_workflows/*.yml; do
+          for file in ./ckeditor4-workflows-common/workflows/*.yml; do
             if [[ -e "$file" ]]; then
               newFile=$(basename $file)
               existingFile="./.github/workflows/$newFile"
@@ -45,7 +45,7 @@ jobs:
 
       - name: Cleanup common workflows artifacts
         run: |
-          rm -rf _workflows
+          rm -rf ckeditor4-workflows-common
 
       - name: Add changes
         if: env.HAS_CHANGES == 1
