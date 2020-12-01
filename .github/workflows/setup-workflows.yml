@@ -19,7 +19,6 @@ jobs:
         with:
           path: ckeditor4-workflows-common
           repository: ckeditor/ckeditor4-workflows-common
-          ref: t/setup-workflows
 
       - name: Setup workflows directory
         run: |
